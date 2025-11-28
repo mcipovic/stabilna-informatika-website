@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO: Primary Meta Tags (English & Serbian/Montenegrin) -->
+    <title>Stabilna informatika | DevOps & System Administration</title>
+    <meta name="description"
+        content="Stabilna informatika d.o.o. delivers expert DevOps, Linux SysAdmin, and Cloud infrastructure solutions. Pouzdana sistemska administracija, održavanje servera i IT rješenja u Crnoj Gori.">
+    <meta name="keywords"
+        content="DevOps, System Administration, Linux, Cloud Infrastructure, Kubernetes, Docker, Ansible, Terraform, Cyber Security, Montenegro, Sistemska administracija, Održavanje servera, DevOps inženjering, IT rješenja, Crna Gora, Podgorica, Sajber bezbjednost">
+    <meta name="author" content="Stabilna informatika d.o.o.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://stabilna-informatika.me">
+    <meta property="og:title" content="Stabilna informatika | DevOps & SysAdmin Experts">
+    <meta property="og:description"
+        content="Reliable Cloud Infrastructure & System Administration. Pouzdana IT rješenja.">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="sr_RS">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://stabilna-informatika.me">
+    <meta property="twitter:title" content="Stabilna informatika | DevOps & SysAdmin Experts">
+    <meta property="twitter:description"
+        content="Reliable Cloud Infrastructure & System Administration. Pouzdana IT rješenja.">
+
+    <link rel="canonical" href="https://stabilna-informatika.me">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Classic Linux X11-style pointer cursor */
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewport='0 0 100 100' style='fill:black;stroke:white;stroke-width:2px;'><path d='M10,10 L30,70 L45,55 L70,80 L80,70 L55,45 L90,40 Z' /></svg>") 10 10, auto;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .terminal-glass {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .cursor-blink {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: #10b981;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        @keyframes pipeline {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 10s infinite;
+        }
+
+        .pipeline-effect {
+            animation: pipeline 2s linear infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        .chaos-mode .terminal-glass {
+            animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both infinite;
+            border-color: #ef4444;
+            background: rgba(69, 10, 10, 0.9);
+        }
+
+        .chaos-mode body {
+            background-color: #1a0505;
+        }
+
+        @keyframes shake {
+
+            10%,
+            90% {
+                transform: translate3d(-1px, 0, 0) rotate(-0.5deg);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(2px, 0, 0) rotate(0.5deg);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-4px, 0, 0) rotate(-1deg);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(4px, 0, 0) rotate(1deg);
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-900 text-slate-200 min-h-screen w-full overflow-x-hidden relative flex items-center justify-center selection:bg-emerald-500/30 selection:text-emerald-200 py-6 md:py-12">
+
+    <div class="fixed inset-0 -z-10">
+        <div
+            class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob">
+        </div>
+        <div
+            class="absolute top-1/3 right-1/4 w-96 h-96 bg-emerald-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-8 left-1/3 w-96 h-96 bg-teal-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob animation-delay-4000">
+        </div>
+    </div>
+
+    <div id="main-card"
+        class="terminal-glass rounded-xl max-w-3xl w-full mx-4 flex flex-col transform transition-all hover:scale-[1.01] duration-500 relative overflow-hidden font-mono shadow-2xl">
+
+        <div id="chaos-warning"
+            class="absolute inset-0 bg-red-900/95 z-50 flex flex-col items-center justify-center text-red-100 opacity-0 pointer-events-none transition-opacity duration-300 font-mono">
+            <div class="border-2 border-red-500 p-6 md:p-8 rounded border-dashed text-center">
+                <i data-lucide="alert-octagon"
+                    class="w-12 h-12 md:w-16 md:h-16 mb-4 mx-auto animate-pulse text-red-500"></i>
+                <h2 class="text-xl md:text-2xl font-bold uppercase tracking-widest mb-2">KERNEL PANIC</h2>
+                <p class="text-red-300 mb-6 text-sm md:text-base">CRITICAL_PROCESS_DIED</p>
+                <button onclick="toggleChaos()"
+                    class="px-4 py-2 bg-red-600 text-white font-bold hover:bg-red-500 transition-colors uppercase text-xs md:text-sm tracking-wider">
+                    > sudo reboot
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-slate-800/50 border-b border-slate-700/50 p-3 md:p-4 flex items-center justify-between">
+            <div class="flex gap-2">
+                <div class="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 cursor-pointer" title="Close"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 cursor-pointer" title="Minimize">
+                </div>
+                <div class="w-3 h-3 rounded-full bg-emerald-500 hover:bg-emerald-400 cursor-pointer" title="Expand">
+                </div>
+            </div>
+            <div class="text-[10px] md:text-xs text-slate-500 font-mono flex items-center gap-2">
+                <i data-lucide="terminal" class="w-3 h-3"></i>
+                guest@stabilna-informatika.me:~/devops
+            </div>
+        </div>
+
+        <div class="p-6 md:p-12 relative">
+
+            <div class="text-xs md:text-sm text-emerald-500/80 mb-6 space-y-1 font-mono">
+                <div class="typing-line" data-text="> Initializing infrastructure..."></div>
+                <div class="typing-line" data-text="> Loading DevOps toolchain... [OK]"></div>
+                <div class="typing-line" data-text="> Establishing secure connection... [OK]"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center gap-6 md:gap-8 mb-8">
+                <div id="logo-trigger"
+                    class="w-24 h-24 md:w-32 md:h-32 flex-shrink-0 cursor-pointer select-none active:scale-95 transition-transform group relative"
+                    role="button" aria-label="Interactive Logo">
+                    <div
+                        class="absolute inset-0 bg-blue-500/20 blur-xl rounded-full group-hover:bg-emerald-500/30 transition-colors duration-500">
+                    </div>
+
+                    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-md relative z-10"
+                        xmlns="http://www.w3.org/2000/svg" aria-labelledby="logoTitle" role="img">
+                        <title id="logoTitle">Stabilna Informatika Logo</title>
+                        <defs>
+                            <linearGradient id="terminalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6" />
+                                <stop offset="100%" style="stop-color:#10b981" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Classic Terminal Window Frame -->
+                        <rect x="15" y="22" width="70" height="56" rx="4" fill="none" stroke="url(#terminalGradient)"
+                            stroke-width="5" stroke-linejoin="round" />
+
+                        <!-- Header Line -->
+                        <line x1="15" y1="38" x2="85" y2="38" stroke="url(#terminalGradient)" stroke-width="3" />
+
+                        <!-- UI Dots -->
+                        <circle cx="24" cy="30" r="2.5" fill="#3b82f6" />
+                        <circle cx="32" cy="30" r="2.5" fill="#10b981" />
+                        <circle cx="40" cy="30" r="2.5" fill="#3b82f6" />
+
+                        <!-- Prompt >_ -->
+                        <path d="M28 52 L38 60 L28 68" fill="none" stroke="url(#terminalGradient)" stroke-width="5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <line x1="44" y1="68" x2="56" y2="68" stroke="url(#terminalGradient)" stroke-width="5"
+                            stroke-linecap="round" />
+                    </svg>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight">
+                        Stabilna<span class="text-emerald-500">Informatika</span>
+                    </h1>
+
+                    <!-- Updated Active Pipeline Badge -->
+                    <div
+                        class="relative overflow-hidden inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-800 border border-slate-700 text-blue-400 text-xs font-mono mb-4 group">
+                        <!-- Pipeline Animation Background -->
+                        <div
+                            class="absolute inset-0 opacity-20 bg-gradient-to-r from-transparent via-emerald-500 to-transparent pipeline-effect">
+                        </div>
+
+                        <!-- Spinning Loader -->
+                        <i data-lucide="loader-2" class="w-3 h-3 text-yellow-500 animate-spin"></i>
+
+                        <span class="relative z-10">v1.0.0-alpha [Pipeline Running]</span>
+                    </div>
+
+                    <p class="text-slate-400 leading-relaxed font-light text-sm md:text-base">
+                        Expert DevOps & System Administration.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-700/50 pt-6 md:pt-8 mt-4">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div
+                        class="text-xs md:text-sm font-mono text-slate-300 break-all md:break-normal text-center md:text-left">
+                        <span class="text-emerald-500 font-bold">$</span> mail -s <span
+                            class="text-yellow-300">"Inquiry"</span>
+                        <a id="email-contact" href="#"
+                            class="text-blue-400 hover:text-emerald-400 transition-colors hover:underline decoration-emerald-500/50 underline-offset-4 ml-1">
+                            [loading...]
+                        </a>
+                    </div>
+
+                    <div class="text-[10px] md:text-xs text-slate-600 font-mono">
+                        &copy; <span id="year"></span> Stabilna informatika d.o.o
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const user = 'kontakt';
+                const domain = 'stabilna-informatika.me';
+                const link = document.getElementById('email-contact');
+
+                link.href = `mailto:${user}@${domain}`;
+                link.textContent = `${user}@${domain}`;
+            }, 800);
+        });
+
+        const typeLines = document.querySelectorAll('.typing-line');
+        let delay = 0;
+
+        typeLines.forEach((line, index) => {
+            const text = line.getAttribute('data-text');
+            line.textContent = '';
+
+            setTimeout(() => {
+                let charIndex = 0;
+                const typeInterval = setInterval(() => {
+                    if (charIndex < text.length) {
+                        line.textContent += text.charAt(charIndex);
+                        charIndex++;
+                    } else {
+                        clearInterval(typeInterval);
+                        if (index === typeLines.length - 1) {
+                            const cursor = document.createElement('span');
+                            cursor.className = 'cursor-blink';
+                            line.appendChild(cursor);
+                        }
+                    }
+                }, 30);
+            }, delay);
+
+            delay += (text.length * 30) + 300;
+        });
+
+        let clickCount = 0;
+        let clickTimer;
+        const logo = document.getElementById('logo-trigger');
+        const body = document.body;
+        const warning = document.getElementById('chaos-warning');
+
+        logo.addEventListener('click', () => {
+            clickCount++;
+            logo.style.transform = `scale(${1 + (clickCount * 0.05)}) rotate(${clickCount * 10}deg)`;
+
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => {
+                clickCount = 0;
+                logo.style.transform = '';
+            }, 800);
+
+            if (clickCount >= 5) {
+                toggleChaos();
+                clickCount = 0;
+                logo.style.transform = '';
+            }
+        });
+
+        function toggleChaos() {
+            const isChaos = body.classList.toggle('chaos-mode');
+            if (isChaos) {
+                warning.classList.remove('opacity-0', 'pointer-events-none');
+                setTimeout(() => warning.classList.add('opacity-0', 'pointer-events-none'), 2500);
+            } else {
+                warning.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+    </script>
+</body>
+
+</html>
