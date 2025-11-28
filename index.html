@@ -255,17 +255,17 @@
                     </h1>
 
                     <!-- Updated Active Pipeline Badge -->
-                    <div
+                    <div id="pipeline-badge"
                         class="relative overflow-hidden inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-800 border border-slate-700 text-blue-400 text-xs font-mono mb-4 group">
                         <!-- Pipeline Animation Background -->
-                        <div
+                        <div id="pipeline-bg"
                             class="absolute inset-0 opacity-20 bg-gradient-to-r from-transparent via-emerald-500 to-transparent pipeline-effect">
                         </div>
 
                         <!-- Spinning Loader -->
-                        <i data-lucide="loader-2" class="w-3 h-3 text-yellow-500 animate-spin"></i>
+                        <i id="pipeline-icon" data-lucide="loader-2" class="w-3 h-3 text-yellow-500 animate-spin"></i>
 
-                        <span class="relative z-10">v1.0.0-alpha [Pipeline Running]</span>
+                        <span id="pipeline-text" class="relative z-10">Deploying your application...</span>
                     </div>
 
                     <p class="text-slate-400 leading-relaxed font-light text-sm md:text-base">
@@ -300,6 +300,7 @@
         document.getElementById('year').textContent = new Date().getFullYear();
 
         window.addEventListener('DOMContentLoaded', () => {
+            // Email obfuscation
             setTimeout(() => {
                 const user = 'kontakt';
                 const domain = 'stabilna-informatika.me';
@@ -308,6 +309,26 @@
                 link.href = `mailto:${user}@${domain}`;
                 link.textContent = `${user}@${domain}`;
             }, 800);
+
+            // Pipeline simulation
+            setTimeout(() => {
+                const badge = document.getElementById('pipeline-badge');
+                const bg = document.getElementById('pipeline-bg');
+                const icon = document.getElementById('pipeline-icon');
+                const text = document.getElementById('pipeline-text');
+
+                if (badge && text && icon && bg) {
+                    text.textContent = '🚀 Application deployed!';
+
+                    badge.classList.remove('text-blue-400', 'border-slate-700');
+                    badge.classList.add('text-emerald-400', 'border-emerald-500/50');
+
+                    icon.style.display = 'none';
+
+                    bg.classList.remove('pipeline-effect');
+                    bg.style.opacity = '0';
+                }
+            }, 3000);
         });
 
         const typeLines = document.querySelectorAll('.typing-line');
