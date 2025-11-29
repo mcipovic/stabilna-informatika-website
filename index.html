@@ -206,7 +206,7 @@
         <div class="p-6 md:p-12 relative">
 
             <div class="text-xs md:text-sm text-emerald-500/80 mb-6 space-y-1 font-mono">
-                <div class="typing-line" data-text="> Initializing infrastructure..."></div>
+                <div class="typing-line" data-text="Initializing infrastructure..."></div>
                 <div class="typing-line" data-text="> Loading DevOps toolchain... [OK]"></div>
                 <div class="typing-line" data-text="> Establishing secure connection... [OK]"></div>
             </div>
@@ -250,13 +250,14 @@
                 </div>
 
                 <div class="text-center md:text-left">
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight">
-                        Stabilna<span class="text-emerald-500">Informatika</span>
+                    <h1 id="company-name"
+                        class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight min-h-[1.2em]">
+                        <!-- Content will be typed here -->
                     </h1>
 
                     <!-- Updated Active Pipeline Badge -->
                     <div id="pipeline-badge"
-                        class="relative overflow-hidden inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-800 border border-slate-700 text-blue-400 text-xs font-mono mb-4 group">
+                        class="relative overflow-hidden inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-800 border border-slate-700 text-blue-400 text-xs font-mono mb-4 group opacity-0 transition-opacity duration-500">
                         <!-- Pipeline Animation Background -->
                         <div id="pipeline-bg"
                             class="absolute inset-0 opacity-20 bg-gradient-to-r from-transparent via-emerald-500 to-transparent pipeline-effect">
@@ -299,25 +300,120 @@
         lucide.createIcons();
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        window.addEventListener('DOMContentLoaded', () => {
-            // Email obfuscation
-            setTimeout(() => {
-                const user = 'kontakt';
-                const domain = 'stabilna-informatika.me';
-                const link = document.getElementById('email-contact');
+        // Helper function to type text into an element
+        function typeText(element, text, speed = 30) {
+            return new Promise(resolve => {
+                let charIndex = 0;
+                element.textContent = '';
+                const typeInterval = setInterval(() => {
+                    if (charIndex < text.length) {
+                        element.textContent += text.charAt(charIndex);
+                        charIndex++;
+                    } else {
+                        clearInterval(typeInterval);
+                        resolve();
+                    }
+                }, speed);
+            });
+        }
 
-                link.href = `mailto:${user}@${domain}`;
-                link.textContent = `${user}@${domain}`;
-            }, 800);
+        // Helper function to type HTML content (specifically for the company name with color span)
+        function typeHtml(element, htmlContent, speed = 50) {
+            return new Promise(resolve => {
+                // Create a temporary container to parse the HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = htmlContent;
 
-            // Pipeline simulation
-            setTimeout(() => {
-                const badge = document.getElementById('pipeline-badge');
-                const bg = document.getElementById('pipeline-bg');
-                const icon = document.getElementById('pipeline-icon');
-                const text = document.getElementById('pipeline-text');
+                // We will type text nodes and insert element nodes
+                const nodes = Array.from(tempDiv.childNodes);
+                let currentNodeIndex = 0;
 
-                if (badge && text && icon && bg) {
+                function processNextNode() {
+                    if (currentNodeIndex >= nodes.length) {
+                        resolve();
+                        return;
+                    }
+
+                    const node = nodes[currentNodeIndex];
+
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        const text = node.textContent;
+                        let charIndex = 0;
+                        const textNode = document.createTextNode('');
+                        element.appendChild(textNode);
+
+                        const typeInterval = setInterval(() => {
+                            if (charIndex < text.length) {
+                                textNode.textContent += text.charAt(charIndex);
+                                charIndex++;
+                            } else {
+                                clearInterval(typeInterval);
+                                currentNodeIndex++;
+                                processNextNode();
+                            }
+                        }, speed);
+                    } else if (node.nodeType === Node.ELEMENT_NODE) {
+                        // For elements (like the span), we create the element and then type inside it
+                        const newElement = document.createElement(node.tagName);
+                        // Copy attributes
+                        Array.from(node.attributes).forEach(attr => {
+                            newElement.setAttribute(attr.name, attr.value);
+                        });
+                        element.appendChild(newElement);
+
+                        // Recursively type content of this element
+                        typeHtml(newElement, node.innerHTML, speed).then(() => {
+                            currentNodeIndex++;
+                            processNextNode();
+                        });
+                    }
+                }
+
+                processNextNode();
+            });
+        }
+
+        async function runSequence() {
+            // 1. Initialization Lines
+            const typeLines = document.querySelectorAll('.typing-line');
+            for (const line of typeLines) {
+                const text = line.getAttribute('data-text');
+                await typeText(line, text, 20);
+                // Add blinking cursor to the last line of this group only while typing next? 
+                // Or just leave it. The original had it on the last line.
+                // Let's add a static cursor to the current line to simulate active terminal
+                const cursor = document.createElement('span');
+                cursor.className = 'cursor-blink';
+                line.appendChild(cursor);
+
+                // Small pause between lines
+                await new Promise(r => setTimeout(r, 300));
+
+                // Remove cursor from previous line except the last one if we want to keep it there
+                if (line !== typeLines[typeLines.length - 1]) {
+                    cursor.remove();
+                }
+            }
+
+            // 2. Type Company Name
+            const companyNameHeader = document.getElementById('company-name');
+            // Stabilna<span class="text-emerald-500">Informatika</span>
+            await typeHtml(companyNameHeader, 'Stabilna<span class="text-emerald-500">Informatika</span>', 50);
+
+            // 3. Start Pipeline Loader
+            const badge = document.getElementById('pipeline-badge');
+            const bg = document.getElementById('pipeline-bg');
+            const icon = document.getElementById('pipeline-icon');
+            const text = document.getElementById('pipeline-text');
+
+            if (badge) {
+                badge.classList.remove('opacity-0'); // Show the badge
+
+                // Wait 3 seconds for "deployment"
+                await new Promise(r => setTimeout(r, 3000));
+
+                // Finish deployment
+                if (text && icon && bg) {
                     text.textContent = '🚀 Application deployed!';
 
                     badge.classList.remove('text-blue-400', 'border-slate-700');
@@ -328,34 +424,22 @@
                     bg.classList.remove('pipeline-effect');
                     bg.style.opacity = '0';
                 }
-            }, 3000);
-        });
+            }
+        }
 
-        const typeLines = document.querySelectorAll('.typing-line');
-        let delay = 0;
-
-        typeLines.forEach((line, index) => {
-            const text = line.getAttribute('data-text');
-            line.textContent = '';
-
+        window.addEventListener('DOMContentLoaded', () => {
+            // Email obfuscation (keep independent)
             setTimeout(() => {
-                let charIndex = 0;
-                const typeInterval = setInterval(() => {
-                    if (charIndex < text.length) {
-                        line.textContent += text.charAt(charIndex);
-                        charIndex++;
-                    } else {
-                        clearInterval(typeInterval);
-                        if (index === typeLines.length - 1) {
-                            const cursor = document.createElement('span');
-                            cursor.className = 'cursor-blink';
-                            line.appendChild(cursor);
-                        }
-                    }
-                }, 30);
-            }, delay);
+                const user = 'kontakt';
+                const domain = 'stabilna-informatika.me';
+                const link = document.getElementById('email-contact');
 
-            delay += (text.length * 30) + 300;
+                link.href = `mailto:${user}@${domain}`;
+                link.textContent = `${user}@${domain}`;
+            }, 800);
+
+            // Start the main sequence
+            runSequence();
         });
 
         let clickCount = 0;
